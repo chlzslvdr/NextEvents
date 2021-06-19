@@ -1,5 +1,7 @@
+/* eslint-disable @next/next/no-img-element */
 import Link from "next/link";
-import Image from "next/image";
+import classes from "./event-item.module.css";
+
 function EventItem(props) {
   const { title, image, date, location, id } = props;
 
@@ -13,19 +15,19 @@ function EventItem(props) {
   const exploreLink = `/events/${id}`;
 
   return (
-    <li>
-      <Image src={image} alt={title} />
-      <div>
-        <div>
+    <li className={classes.item}>
+      <img src={image} alt={title} className={classes.image} />
+      <div className={classes.content}>
+        <div className={classes.summary}>
           <h2>{title}</h2>
-          <div>
+          <div className={classes.date}>
             <time>{humanReadableDate}</time>
           </div>
-          <div>
+          <div className={classes.address}>
             <address>{formattedAddress}</address>
           </div>
         </div>
-        <div>
+        <div className={classes.actions}>
           <Link href={exploreLink}>Explore Event</Link>
         </div>
       </div>
