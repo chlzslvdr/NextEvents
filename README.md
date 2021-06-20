@@ -1,6 +1,8 @@
+[![Netlify Status](https://api.netlify.com/api/v1/badges/7d0ad5e5-0789-4fd4-925e-441771694d8c/deploy-status)](https://app.netlify.com/sites/nextevents-demo/deploys)
+
 # NextEvents
 
-This is a Demo Project made with [Next.js & React - The Complete Guide (incl. Two Paths!)](https://github.com/mschwarzmueller/nextjs-course-code).
+This is a [Demo Project](https://nextevents-demo.netlify.app) made with [Next.js & React - The Complete Guide (incl. Two Paths!)](https://github.com/mschwarzmueller/nextjs-course-code).
 
 ## Installation
 
