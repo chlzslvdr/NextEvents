@@ -15,7 +15,7 @@ yarn install
 Add the necessary `env` variables:
 
 ```
-DB_URL={api-url}
+API_URL={api-url}
 ```
 
 ## Start Locally
