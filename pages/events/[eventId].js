@@ -1,32 +1,11 @@
 import { Fragment } from "react";
-import { useRouter } from "next/router";
 import { getEventById, getFeaturedEvents } from "../../helpers/api-util";
 import EventSummary from "../../components/event-detail/event-summary";
 import EventLogistics from "../../components/event-detail/event-logistics";
 import EventContent from "../../components/event-detail/event-content";
-import ErrorAlert from "../../components/ui/error-alert";
-import Button from "../../components/ui/button";
 
 function EventDetailPage({ selectedEvent }) {
-  const router = useRouter();
   const event = selectedEvent;
-
-  if (router.isFallback) {
-    return (
-      <Fragment>
-        <ErrorAlert>No available event</ErrorAlert>
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
-          <Button link="/events">Show All Events</Button>
-        </div>
-      </Fragment>
-    );
-  }
 
   if (!event) {
     return (
@@ -73,7 +52,7 @@ export async function getStaticPaths() {
 
   return {
     paths,
-    fallback: true,
+    fallback: false,
   };
 }
 
