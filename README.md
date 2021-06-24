@@ -11,6 +11,13 @@ Clone and run yarn install to install the dependencies.
 ```bash
 yarn install
 ```
+
+Add the necessary `env` variables:
+
+```
+DB_URL={api-url}
+```
+
 ## Start Locally
 
 Run the development server:
