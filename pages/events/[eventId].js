@@ -1,20 +1,38 @@
 import { Fragment } from "react";
-import { getEventById, getAllEvents } from "../../helpers/api-util";
+import { useRouter } from "next/router";
+import { getEventById, getFeaturedEvents } from "../../helpers/api-util";
 import EventSummary from "../../components/event-detail/event-summary";
 import EventLogistics from "../../components/event-detail/event-logistics";
 import EventContent from "../../components/event-detail/event-content";
 import ErrorAlert from "../../components/ui/error-alert";
+import Button from "../../components/ui/button";
 
 function EventDetailPage({ selectedEvent }) {
+  const router = useRouter();
   const event = selectedEvent;
+
+  if (router.isFallback) {
+    return (
+      <Fragment>
+        <ErrorAlert>No available event</ErrorAlert>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <Button link="/events">Show All Events</Button>
+        </div>
+      </Fragment>
+    );
+  }
 
   if (!event) {
     return (
-      <Fragment>
-        <ErrorAlert>
-          <p>No event found!</p>
-        </ErrorAlert>
-      </Fragment>
+      <div className="center">
+        <p>Loading...</p>
+      </div>
     );
   }
 
@@ -42,19 +60,20 @@ export async function getStaticProps(context) {
     props: {
       selectedEvent: event,
     },
+    revalidate: 3600,
   };
 }
 
 export async function getStaticPaths() {
-  const events = await getAllEvents();
+  const events = await getFeaturedEvents();
 
   const paths = events.map((event) => ({
     params: { eventId: event.id },
   }));
 
   return {
-    paths: paths,
-    fallback: false,
+    paths,
+    fallback: true,
   };
 }
 
