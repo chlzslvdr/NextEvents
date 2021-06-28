@@ -15,7 +15,7 @@ yarn install
 Add the necessary `env` variables:
 
 ```
-API_URL={api-url}
+NEXT_PUBLIC_API_URL={api-url}
 ```
 
 ## Start Locally
