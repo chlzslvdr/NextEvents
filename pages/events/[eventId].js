@@ -4,8 +4,8 @@ import EventSummary from "../../components/event-detail/event-summary";
 import EventLogistics from "../../components/event-detail/event-logistics";
 import EventContent from "../../components/event-detail/event-content";
 
-function EventDetailPage({ selectedEvent }) {
-  const event = selectedEvent;
+function EventDetailPage(props) {
+  const event = props.selectedEvent;
 
   if (!event) {
     return (
@@ -33,26 +33,25 @@ function EventDetailPage({ selectedEvent }) {
 
 export async function getStaticProps(context) {
   const eventId = context.params.eventId;
+
   const event = await getEventById(eventId);
 
   return {
     props: {
       selectedEvent: event,
     },
-    revalidate: 3600,
+    revalidate: 30,
   };
 }
 
 export async function getStaticPaths() {
   const events = await getFeaturedEvents();
 
-  const paths = events.map((event) => ({
-    params: { eventId: event.id },
-  }));
+  const paths = events.map((event) => ({ params: { eventId: event.id } }));
 
   return {
-    paths,
-    fallback: false,
+    paths: paths,
+    fallback: "blocking",
   };
 }
 
