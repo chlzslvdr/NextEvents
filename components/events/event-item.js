@@ -1,4 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
+import Image from "next/image";
 import Button from "../ui/button";
 import DateIcon from "../icons/date-icon";
 import AddressIcon from "../icons/address-icon";
@@ -19,7 +20,7 @@ function EventItem(props) {
 
   return (
     <li className={classes.item}>
-      <img src={image} alt={title} className={classes.image} />
+      <Image src={image} alt={title} width={250} height={160} />
       <div className={classes.content}>
         <div className={classes.summary}>
           <h2>{title}</h2>
