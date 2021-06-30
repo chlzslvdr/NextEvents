@@ -16,6 +16,7 @@ Add the necessary `env` variables:
 
 ```
 NEXT_PUBLIC_API_URL={api-url}
+MONGODB_URL={mongodb-url}
 ```
 
 ## Start Locally
