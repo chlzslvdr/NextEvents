@@ -1,7 +1,11 @@
-import { v4 as uuidv4 } from "uuid";
+import { MongoClient } from "mongodb";
 
-function handler(req, res) {
+async function handler(req, res) {
   const eventId = req.query.eventId;
+
+  const client = await MongoClient.connect(process.env.MONGODB_URL, {
+    useUnifiedTopology: true,
+  });
 
   if (req.method === "POST") {
     const { email, name, text } = req.body;
@@ -20,13 +24,17 @@ function handler(req, res) {
     }
 
     const newComment = {
-      id: uuidv4(),
       email,
       name,
       text,
+      eventId,
     };
 
-    console.log(newComment);
+    const db = client.db();
+    const result = await db.collection("comments").insertOne(newComment);
+
+    newComment.id = result.insertedId;
+
     res.status(201).json({
       message: "Added comment.",
       comment: newComment,
@@ -43,5 +51,8 @@ function handler(req, res) {
       comments: dummyList,
     });
   }
+
+  client.close();
 }
+
 export default handler;
